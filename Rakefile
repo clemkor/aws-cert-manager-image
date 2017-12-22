@@ -22,7 +22,7 @@ version = S3VersionFile.new(
 
 task :default => [
     :'bootstrap:plan',
-    :'cert_manager:image_repository:plan'
+    :'image_repository:plan'
 ]
 
 namespace :version do
