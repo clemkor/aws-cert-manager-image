@@ -1,7 +1,7 @@
-AWS NXT Node
-===============
+AWS Cert Manager Image
+======================
 
-An NXT node on AWS.
+A docker image for managing certs using the ATOM protocol on AWS.
 
 Development
 -----------
