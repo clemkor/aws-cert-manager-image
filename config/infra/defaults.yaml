@@ -2,6 +2,7 @@
 region: "eu-west-1"
 
 component: "cert-manager"
+deployment_identifier: "default"
 
 storage_bucket_name: "eth-quest-%{hiera('component')}-storage-%{hiera('deployment_identifier')}"
 
