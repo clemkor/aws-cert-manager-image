@@ -17,14 +17,6 @@ echo "Fetching and sourcing configuration."
 eval $(aws s3 cp --sse AES256 --region ${AWS_REGION} \
     ${AWS_S3_CONFIGURATION_OBJECT} - | sed 's/^/export /')
 
-echo "Determining certificate domains."
-if [ "${CERT_MANAGER_INCLUDE_PUBLIC_IP}" == "yes" ]; then
-    public_ip=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
-    domains="${CERT_MANAGER_DOMAIN},${public_ip}"
-else
-    domains="${CERT_MANAGER_DOMAIN}"
-fi
-
 echo "Fetching certificate..."
 certbot certonly \
     --non-interactive \
@@ -37,7 +29,7 @@ certbot certonly \
     --work-dir /opt/cert-manager/work/ \
     --agree-tos \
     --preferred-challenges dns \
-    --domain ${domains} \
+    --domain ${CERT_MANAGER_DOMAIN} \
     --email ${CERT_MANAGER_EMAIL}
 
 echo "Converting to PKCS12 keystore..."
